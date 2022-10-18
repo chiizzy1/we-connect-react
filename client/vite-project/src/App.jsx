@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import './App.css'
+import Home from './components/Home'
+import Welcome from './components/Welcome'
 
 function App() {
 
   return (
     <div className="App">
-      <h1>hello world</h1>
+      <Welcome />
+      <Home />
     </div>
   )
 }

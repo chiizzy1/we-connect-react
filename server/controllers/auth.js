@@ -37,7 +37,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/feed");
+      res.send("Success! You are logged in.");
     });
   })(req, res, next);
 };

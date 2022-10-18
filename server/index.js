@@ -1,21 +1,18 @@
-import express from "express";
-import cors from "cors"
-import mongoose from "mongoose";
-import passport from "passport";
-import session from "express-session";
-import logger from "morgan"
-import MongoStore from "connect-mongo";
-import methodOverride from "method-override";
-import flash from "express-flash";
+const express = require("express");
+const app = express();
+const cors = require("cors")
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const MongoStore = require('connect-mongo');
+const methodOverride = require("method-override");
+const flash = require("express-flash");
+const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-// const postRoutes = require("./routes/posts");
-// const commentRoutes = require("./routes/comments");
-// const editRoutes = require("./routes/edit")
 
 
-const app = express();
-
+app.use(cors())
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -25,8 +22,6 @@ require("./config/passport")(passport);
 //Connect To Database
 connectDB();
 
-// Use Cors
-app.use(cors());
 
 //Static Folder
 app.use(express.static("public"));
@@ -62,9 +57,6 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-// app.use("/post", postRoutes);
-// app.use("/comment", commentRoutes);
-// app.use("/edit", editRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
