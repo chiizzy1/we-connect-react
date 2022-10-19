@@ -1,9 +1,10 @@
 import React from 'react';
 import Axios from "axios"
+import { useState, useEffect } from 'react';
 
 const Welcome = () => {
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState ({
       email: "",
       password: ""
   })
@@ -21,19 +22,21 @@ const Welcome = () => {
 
 
       
-
+    useEffect(()=>{
+            Axios.post('http://localhost:2121/login', {
+                email: formData.email,
+                password: formData.password
+            })
+            .then(res => {
+                // Work with the response...
+                console.log(res);
+            }).catch(err => {
+                // Handle error
+                console.log(err);
+            });
+    }, [])
     
-      Axios.post('http://localhost:2121/login', {
-        email: formData.email,
-        password: formData.password
-      })
-      .then(res => {
-          // Work with the response...
-          console.log(res);
-      }).catch(err => {
-          // Handle error
-          console.log(err);
-      });
+      
   }
 
 
