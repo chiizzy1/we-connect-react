@@ -2,12 +2,12 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
-exports.getLogin = (req, res) => {
-  if (req.user) {
-    return res.redirect("/feed");
-  } 
-  res.render("login", { title: "Login", user: req.user});
-};
+// exports.getLogin = (req, res) => {
+//   if (req.user) {
+//     return res.redirect("/feed");
+//   } 
+//   res.render("login", { title: "Login", user: req.user});
+// };
 
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
@@ -43,14 +43,14 @@ exports.postLogin = (req, res, next) => {
 };
 
 
-exports.getSignup = (req, res) => {
-    if (req.user) {
-      return res.redirect("/profile");
-    }
-    res.render("signup", {
-      title: "Create Account",
-    });
-  };
+// exports.getSignup = (req, res) => {
+//     if (req.user) {
+//       return res.redirect("/profile");
+//     }
+//     res.render("signup", {
+//       title: "Create Account",
+//     });
+//   };
   
 exports.postSignup = (req, res, next) => {
     const validationErrors = [];

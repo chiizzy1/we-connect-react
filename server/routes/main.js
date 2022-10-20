@@ -8,14 +8,14 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 
 //Main Routes - simplified for now
-router.get("/", (req, res) =>{
-    res.send("Hello world")
-});
+// router.get("/", (req, res) =>{
+//     res.send("Hello world")
+// });
 // Login
-router.get("/login", authController.getLogin);
+// router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 // Sign up
-router.get("/signup", authController.getSignup);
+// router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 // Profile page
 // router.get("/profile", ensureAuth, postsController.getProfile);
