@@ -35,13 +35,14 @@ const login = () => {
     function handleSubmit(event) {
         event.preventDefault()
   
-        Axios.post('http://localhost:2121/login', {
+        useEffect(()=>{
+            Axios.post('http://localhost:2121/login', {
                   email: formData.email,
                   password: formData.password
               })
               .then(res => {
                   // Work with the response...
-                //   console.log(res.data);
+                  console.log(res.data);
                   setUserData(() => res.data)
                   navigate("/feed")
                 
@@ -49,6 +50,7 @@ const login = () => {
                   // Handle error
                   console.log(err);
               });
+        }, [])
 
         
     }
