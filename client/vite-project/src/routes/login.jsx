@@ -1,109 +1,59 @@
 import Axios  from 'axios'
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
-
-
-
-
-// const loader = async () => {
-//   const user = await getUser();
-//   if (!user) {
-//     return redirect("/login");
-//   }
-// };
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 
 
 const login = () => {
     const navigate = useNavigate()
     
-    const [formData, setFormData] = useState ({
-        email: "",
-        password: ""
-    })
+    const schema = yup.object().shape({
+        email: yup.string().email().required("Enter a valid email"),
+        password: yup.string().min(4).max(20).required("Password must be greater than 4 and less than 20"),
+      });
+    
+      const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm({
+        resolver: yupResolver(schema),
+      });
+    
+      const onSubmit = ({email, password}) => {
+        console.log(email, password);
 
-    const [userData, setUserData] = useState(null)
-  
-    function handleChange(event) {
-      const {name, value, type, checked} = event.target
-      setFormData(prevFormData => ({
-          ...prevFormData,
-          [name]: type === "checkbox" ? checked : value
-      }))
-    }
-  
-    function handleSubmit(event) {
-        event.preventDefault()
-  
-        useEffect(()=>{
-            Axios.post('http://localhost:2121/login', {
-                  email: formData.email,
-                  password: formData.password
+        Axios.post('http://localhost:2121/login', {
+                  email: email,
+                  password: password
               })
               .then(res => {
                   // Work with the response...
                   console.log(res.data);
-                  setUserData(() => res.data)
                   navigate("/feed")
                 
               }).catch(err => {
                   // Handle error
                   console.log(err);
               });
-        }, [])
-
-        
-    }
-  console.log(userData);
-  
-    return (
-      <>
-        <h1>Welcome to Landing Page</h1>
-  
-        <form className="form" onSubmit={handleSubmit}>
-                  <input 
-                      type="email" 
-                      placeholder="Email address"
-                      className="form--input"
-                      name="email"
-                      onChange={handleChange}
-                      value={formData.email}
-                  />
-                  <input 
-                      type="password" 
-                      placeholder="Password"
-                      className="form--input"
-                      name="password"
-                      onChange={handleChange}
-                      value={formData.password}
-                  />
-                  {/* <input 
-                      type="password" 
-                      placeholder="Confirm password"
-                      className="form--input"
-                      name="passwordConfirm"
-                      onChange={handleChange}
-                      value={formData.passwordConfirm}
-                  /> */}
-                  
-                  {/* <div className="form--marketing">
-                      <input
-                          id="okayToEmail"
-                          type="checkbox"
-                          name="joinedNewsletter"
-                          onChange={handleChange}
-                          checked={formData.joinedNewsletter}
-                      />
-                      <label htmlFor="okayToEmail">I want to join the newsletter</label>
-                  </div> */}
-                  <button 
-                      className="form--submit"
-                  >
-                      Sign up
-                  </button>
-              </form>
-      </>
-    )
+      };
+    
+      return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input type="text" placeholder="Email..." {...register("email")} />
+          <p>{errors.email?.message}</p>
+          <input
+            type="password"
+            placeholder="Password..."
+            {...register("password")}
+          />
+          <p>{errors.password?.message}</p>
+          <input type="submit" />
+        </form>
+      );
 
 }
 
