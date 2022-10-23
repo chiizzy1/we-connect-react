@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 
 
 const login = () => {
     const navigate = useNavigate()
+
     
     const schema = yup.object().shape({
         email: yup.string().email().required("Enter a valid email"),
@@ -22,23 +24,41 @@ const login = () => {
       } = useForm({
         resolver: yupResolver(schema),
       });
+
+      const postData = async ({email, password}) => {
+        try {
+          let user = Axios.post('http://localhost:2121/login', {
+                email: email,
+                password: password
+            })
+
+            return user
+            // console.log(user);
+        } catch (error) {
+          console.log(error);
+        }
+      } 
+
+      const { mutate, error, isLoading, isError } = useMutation(postData, {
+        onSuccess: (successData) => { 
+          console.log(successData.data._id)
+          navigate("/feed")
+         }
+      })
     
+
+      if (isLoading){
+        return <p>Loading...</p>
+      }
+
+      if (isError){
+        return <div>Error! {error.message}</div>
+      }
+
+
       const onSubmit = ({email, password}) => {
         console.log(email, password);
-
-        Axios.post('http://localhost:2121/login', {
-                  email: email,
-                  password: password
-              })
-              .then(res => {
-                  // Work with the response...
-                  console.log(res.data);
-                  navigate("/feed")
-                
-              }).catch(err => {
-                  // Handle error
-                  console.log(err);
-              });
+        mutate({ email: email,  password: password })
       };
     
       return (
