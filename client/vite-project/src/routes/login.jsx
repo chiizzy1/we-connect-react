@@ -5,12 +5,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
+import { useDispatch } from "react-redux";
+import { setUser } from '../features/user/userSlice';
 
 
 const login = () => {
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
     
     const schema = yup.object().shape({
         email: yup.string().email().required("Enter a valid email"),
@@ -41,7 +42,8 @@ const login = () => {
 
       const { mutate, error, isLoading, isError } = useMutation(postData, {
         onSuccess: (successData) => { 
-          console.log(successData)
+          console.log(successData.user.userName)
+          dispatch(setUser(successData))
           navigate("/feed")
          }
       })

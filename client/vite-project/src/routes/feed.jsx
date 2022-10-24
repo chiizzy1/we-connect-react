@@ -1,8 +1,14 @@
 import Axios  from 'axios';
 import { useQuery } from "@tanstack/react-query";
+import { loggedUser } from '../features/user/userSlice';
+import { useSelector } from 'react-redux';
 
 
 const feed = () => {
+
+  const user = useSelector(loggedUser)
+
+  // console.log("this user", user.user.userName);
 
   async function fetchPosts() {
       const { data } = await Axios.get('http://localhost:2121/feed')
@@ -20,10 +26,10 @@ const feed = () => {
     return <h1> Loading...</h1>;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
-    <div>welcome to your feeds page feed</div>
+    <div>welcome to your feeds: <h1>{user.user.userName}</h1>  </div>
   )
 }
 
