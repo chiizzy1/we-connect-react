@@ -3,7 +3,7 @@ const router = express.Router();
 // const homeController = require("../controllers/home");
 const authController = require("../controllers/auth");
 const postsController = require("../controllers/posts")
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+// const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 
 
@@ -20,7 +20,7 @@ router.post("/signup", authController.postSignup);
 // Profile page
 // router.get("/profile", ensureAuth, postsController.getProfile);
 // Feeds page
-router.get("/feed",  postsController.getFeed);
+router.get("/feed", postsController.getFeed);
 // Logout Page
 router.get("/logout", authController.logout);
 

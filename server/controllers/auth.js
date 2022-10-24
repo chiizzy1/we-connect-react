@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 // exports.getLogin = (req, res) => {
 //   if (req.user) {
@@ -17,8 +18,10 @@ exports.postLogin = (req, res, next) => {
     validationErrors.push({ msg: "Password cannot be blank." });
 
   if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/login");
+    return res.status(400).send({
+      message: validationErrors,
+      error,
+    });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -29,15 +32,31 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash("errors", info);
-      return res.redirect("/login");
+      return res.status(400).send({
+        message: "User does not exist",
+      });
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      req.flash("success", { msg: "Success! You are logged in." });
-      res.send(user);
+
+      //   create JWT token
+      const token = jwt.sign(
+        {
+          userId: user._id,
+          userEmail: user.email,
+        },
+        "RANDOM-TOKEN",
+        { expiresIn: "24h" }
+      );
+
+      res.status(200).send({
+        message: "Login Successful",
+        user: user,
+        token,
+      })
+      // res.send(user);
     });
   })(req, res, next);
 };
@@ -64,8 +83,10 @@ exports.postSignup = (req, res, next) => {
       validationErrors.push({ msg: "Passwords do not match" });
   
     if (validationErrors.length) {
-      req.flash("errors", validationErrors);
-      return res.redirect("../signup");
+      return res.status(400).send({
+        message: validationErrors,
+        error,
+      });
     }
     req.body.email = validator.normalizeEmail(req.body.email, {
       gmail_remove_dots: false,
@@ -94,10 +115,9 @@ exports.postSignup = (req, res, next) => {
           return next(err);
         }
         if (existingUser) {
-          req.flash("errors", {
-            msg: "Account with that email address or username already exists.",
+          return res.status(500).send({
+            message: "Account with that email address or username already exists.",
           });
-          return res.redirect("../signup");
         }
         user.save((err) => {
           if (err) {
@@ -107,7 +127,10 @@ exports.postSignup = (req, res, next) => {
             if (err) {
               return next(err);
             }
-            res.redirect("/profile");
+            res.status(201).send({
+              message: "User Created Successfully",
+              user,
+            });
           });
         });
       }

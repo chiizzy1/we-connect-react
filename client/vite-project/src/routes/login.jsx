@@ -27,12 +27,12 @@ const login = () => {
 
       const postData = async ({email, password}) => {
         try {
-          let user = Axios.post('http://localhost:2121/login', {
+          let user = await Axios.post('http://localhost:2121/login', {
                 email: email,
                 password: password
             })
 
-            return user
+            return user.data
             // console.log(user);
         } catch (error) {
           console.log(error);
@@ -41,7 +41,7 @@ const login = () => {
 
       const { mutate, error, isLoading, isError } = useMutation(postData, {
         onSuccess: (successData) => { 
-          console.log(successData.data._id)
+          console.log(successData)
           navigate("/feed")
          }
       })

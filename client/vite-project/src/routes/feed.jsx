@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 const feed = () => {
 
   async function fetchPosts() {
-      const data = await Axios.get('http://localhost:2121/feed')
+      const { data } = await Axios.get('http://localhost:2121/feed')
       // console.log(data);
       return data
   }
@@ -20,7 +20,7 @@ const feed = () => {
     return <h1> Loading...</h1>;
   }
 
-  console.log(data.data);
+  console.log(data);
 
   return (
     <div>welcome to your feeds page feed</div>
