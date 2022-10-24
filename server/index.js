@@ -11,8 +11,13 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 
-
-app.use(cors())
+app.use(cors({
+  origin: function(origin, callback){
+    return callback(null, true);
+  },
+  optionsSuccessStatus: 200,
+  credentials: true
+}));
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -41,10 +46,16 @@ app.use(
   session({
     secret: "keyboard cat",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: MongoStore.create({
-        mongoUrl: process.env.DB_STRING
-    })
+        mongoUrl: process.env.DB_STRING,
+        collection: 'UserSessions'
+    }),
+    cookie: {
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      httpOnly: true
+    }
   })
 );
 

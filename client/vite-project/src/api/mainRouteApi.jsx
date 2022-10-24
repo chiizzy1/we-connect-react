@@ -16,20 +16,20 @@ const mainRouteApi = Axios.create({
 //     })
 // }
 
-export const getUserProfile = async () => {
-    const response = await mainRouteApi.get("/profile")
-    return response.data
-}
+// export const getUserProfile = async () => {
+//     const response = await mainRouteApi.get("/profile")
+//     return response.data
+// }
 
-export const getFeed = async () => {
-    const response = await mainRouteApi.get("/feed")
-    return response.data
-}
+// export const getFeed = async () => {
+//     const response = await mainRouteApi.get("/feed")
+//     return response.data
+// }
 
-export const logUserOut = async () => {
-    const response = await mainRouteApi.get("/logout")
-    return response.data
-}
+// export const logUserOut = async () => {
+//     const response = await mainRouteApi.get("/logout")
+//     return response.data
+// }
 
 
 

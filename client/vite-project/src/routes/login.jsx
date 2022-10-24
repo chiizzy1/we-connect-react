@@ -42,9 +42,9 @@ const login = () => {
 
       const { mutate, error, isLoading, isError } = useMutation(postData, {
         onSuccess: (successData) => { 
-          console.log(successData.user.userName)
+          console.log("welcome", successData.user.userName)
           dispatch(setUser(successData))
-          navigate("/feed")
+          navigate("/profile")
          }
       })
     
