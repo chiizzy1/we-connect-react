@@ -26,7 +26,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/editProfile" element={<EditProfile />} />
             <Route path="/feed" element={<Feed />} />
-            <Route path="/post" element={<Post />} />
+            <Route path="/post/:id" element={<Post />} />
             <Route path="*" element={<h1> PAGE NOT FOUND</h1>} />
           </Routes>
         </Router>

@@ -1,10 +1,10 @@
 import Axios  from 'axios';
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from 'react-router-dom'
 import { loggedUser } from '../features/user/userSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { setPosts } from '../features/posts/postsSlice';
+import { Link } from 'react-router-dom';
 
 
 const profile = () => {
@@ -29,20 +29,30 @@ const profile = () => {
   }
 
   // console.log(data.posts[0]._id);
-  console.log(data[0]._id);
+  console.log(data);
   dispatch(setPosts(data))
+
+  // const userPosts = data.map((post) => {
+
+  // });
 
   return (
     <>
-      <div>Welcome to Profile page: <h1>{user.userName}</h1> </div>
-      {
-        data && data.map((post) => {
+      {data && <div>Welcome to Profile page: <h1>{data[1].text}</h1> </div>}
+      {data &&
+         data.map((post) => {
           <div key={post._id}>
             <p>{post.text}</p>
             <img src={post.image} alt='img'/>
           </div>
         })
       }
+      <div key={data[0]._id}>
+            <p>{data[0].text}</p>
+            <Link to={`/post/${data[0]._id}`}>
+              <img src={data[0].image} alt='img'/>
+            </Link>
+          </div>
 
     </>
   )

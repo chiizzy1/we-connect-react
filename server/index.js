@@ -10,6 +10,7 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
+const postsRoutes = require("./routes/posts")
 
 // app.use(cors({
 //   origin: "http://127.0.0.1:5173",
@@ -72,6 +73,7 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/api", mainRoutes);
+app.use("/api/post", postsRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

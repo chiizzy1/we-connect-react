@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux';
 
 const feed = () => {
 
-  const user = useSelector(loggedUser)
+  const { user } = useSelector(loggedUser)
 
   // console.log("this user", user.user.userName);
 
   async function fetchPosts() {
-      const { data } = await Axios.get('http://localhost:2121/feed')
+      const { data } = await Axios.get('/api/feed')
       // console.log(data);
       return data
   }
@@ -29,7 +29,7 @@ const feed = () => {
   // console.log(data);
 
   return (
-    <div>welcome to your feeds: <h1>{user.user.userName}</h1>  </div>
+    <div>welcome to your feeds: <h1>{user.userName}</h1>  </div>
   )
 }
 
