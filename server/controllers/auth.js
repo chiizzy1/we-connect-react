@@ -1,7 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 // exports.getLogin = (req, res) => {
 //   if (req.user) {
@@ -42,19 +42,20 @@ exports.postLogin = (req, res, next) => {
       }
 
       //   create JWT token
-      const token = jwt.sign(
-        {
-          userId: user._id,
-          userEmail: user.email,
-        },
-        "RANDOM-TOKEN",
-        { expiresIn: "24h" }
-      );
+      // const token = jwt.sign(
+      //   {
+      //     userId: user._id,
+      //     userEmail: user.email,
+      //   },
+      //   "RANDOM-TOKEN",
+      //   { expiresIn: "24h" }
+      // );
+
+      req.session.name = req.body.email;
 
       res.status(200).send({
         message: "Login Successful",
         user: user,
-        token,
       })
       // res.send(user);
     });

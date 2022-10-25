@@ -26,14 +26,15 @@ const login = () => {
         resolver: yupResolver(schema),
       });
 
+      
       const postData = async ({email, password}) => {
         try {
-          let user = await Axios.post('http://localhost:2121/login', {
+          let { data } = await Axios.post('/api/login', {
                 email: email,
                 password: password
             })
 
-            return user.data
+            return data
             // console.log(user);
         } catch (error) {
           console.log(error);

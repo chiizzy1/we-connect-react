@@ -11,13 +11,15 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 
-app.use(cors({
-  origin: function(origin, callback){
-    return callback(null, true);
-  },
-  optionsSuccessStatus: 200,
-  credentials: true
-}));
+// app.use(cors({
+//   origin: "http://127.0.0.1:5173",
+//   methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+//   credentials: true,
+//   optionsSuccessStatus: 200,
+// }));
+
+// app.set("trust proxy", 1);
+
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -44,17 +46,19 @@ app.use(methodOverride("_method"));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
+    name: "usersession",
     secret: "keyboard cat",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({
         mongoUrl: process.env.DB_STRING,
-        collection: 'UserSessions'
+        collection: 'UserSessions',
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7
     }),
     cookie: {
-      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
       maxAge: 1000 * 60 * 60 * 24 * 7,
-      httpOnly: true
+      sameSite: "lax",
+      secure: false,
     }
   })
 );
@@ -67,7 +71,7 @@ app.use(passport.session());
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
-app.use("/", mainRoutes);
+app.use("/api", mainRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
