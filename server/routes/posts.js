@@ -8,6 +8,9 @@ const postsController = require("../controllers/posts");
 router.get("/:id",  postsController.getPost);
 
 
-
+// Like post
+router.put("/likePost/:id", postsController.likePost);
+// Delete Post
+router.delete("/deletePost/:id", postsController.deletePost);
 
 module.exports = router;

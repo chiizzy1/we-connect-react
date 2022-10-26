@@ -18,12 +18,21 @@ import { useParams } from "react-router-dom"
 //     return await postRouteApi.post(`/createPost`, post)
 // }
 
-// export const likePost = async () => {
-//     return await postRouteApi.patch(`/likePost/${id}`, post)
+// export const likePost = async (id) => {
+//     const { data } = await Axios.put(`/api/post/${id}`,  { withCredentials: true })
+//       // console.log(data);
+//     return data
 // }
 
-// export const deletePost = async (id) => {
-//     return await postRouteApi.delete(`/deletePost/${id}`, id)
-// }
+export const deletePost = async (id) => {
+    try {
+        const { data } = await Axios.delete(`/api/post/deletePost/${id}`,  { withCredentials: true })
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 
 // export default postRouteApi

@@ -38,21 +38,21 @@ const profile = () => {
 
   return (
     <>
-      {data && <div>Welcome to Profile page: <h1>{data[1].text}</h1> </div>}
-      {data &&
+      {user && <div>Welcome to Profile page: <h1>{user.userName}</h1> </div>}
+      {/* {data &&
          data.map((post) => {
           <div key={post._id}>
             <p>{post.text}</p>
             <img src={post.image} alt='img'/>
           </div>
         })
-      }
-      <div key={data[0]._id}>
+      } */}
+      {data && <div key={data[0]._id}>
             <p>{data[0].text}</p>
             <Link to={`/post/${data[0]._id}`}>
               <img src={data[0].image} alt='img'/>
             </Link>
-          </div>
+          </div>}
 
     </>
   )
