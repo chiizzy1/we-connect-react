@@ -24,14 +24,14 @@ import { useParams } from "react-router-dom"
 //     return data
 // }
 
-export const deletePost = async (id) => {
-    try {
-        const { data } = await Axios.delete(`/api/post/deletePost/${id}`,  { withCredentials: true })
-        return data
-    } catch (error) {
-        console.log(error);
-    }
-}
+// export const deletePost = async (id) => {
+//     try {
+//         const { data } = await Axios.delete(`/api/post/deletePost/${id}`,  { withCredentials: true })
+//         return data
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 
 

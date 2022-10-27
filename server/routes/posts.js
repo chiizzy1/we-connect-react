@@ -7,6 +7,9 @@ const postsController = require("../controllers/posts");
 //Post Routes - simplified for now
 router.get("/:id",  postsController.getPost);
 
+// Create post
+router.post("/createPost", postsController.createPost);
+
 
 // Like post
 router.put("/likePost/:id", postsController.likePost);

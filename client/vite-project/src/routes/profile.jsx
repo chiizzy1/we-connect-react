@@ -29,7 +29,7 @@ const profile = () => {
   }
 
   // console.log(data.posts[0]._id);
-  console.log(data);
+  // console.log(data);
   dispatch(setPosts(data))
 
   // const userPosts = data.map((post) => {
