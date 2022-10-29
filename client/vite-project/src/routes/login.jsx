@@ -32,7 +32,7 @@ const login = () => {
           let { data } = await Axios.post('/api/login', {
                 email: email,
                 password: password
-            })
+            }, { withCredentials: true })
 
             return data
             // console.log(user);

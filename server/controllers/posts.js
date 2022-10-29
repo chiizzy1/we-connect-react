@@ -60,30 +60,27 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
-    try {
-      if (!req.file) {
-        console.log(req);
-        res.send({
-          status: 'failed',
-          message: 'No file',
-        })
-      }else{
-      // Upload image to cloudinary
-          // const result = await cloudinary.uploader.upload(req.file.path);
+    const { text, image } = req.body;
 
-          //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
-          // await Post.create({
-          //   text: req.body.text,
-          //   image: result.secure_url,
-          //   cloudinaryId: result.public_id,
-          //   likes: 0,
-          //   user: req.user.id,
-          // });
-          console.log(req.file);
-          res.send("file upload successful");
+    try {
+      if (image){
+        const result = await cloudinary.uploader.upload(image);
+
+        if(result){
+          await Post.create({
+            text: text,
+            image: result.secure_url,
+            cloudinaryId: result.public_id,
+            likes: 0,
+            user: req.user.id,
+          });
+          
+          res.send("post created successful");
         }
-    } catch (err) {
-      console.log(err);
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
     }
   },
 }

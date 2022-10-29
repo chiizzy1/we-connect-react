@@ -10,9 +10,13 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
 
 
 const post = () => {
+  const [desc, setDesc] = useState("");
+
+
   const queryClient = useQueryClient()
   const { id } = useParams()
   const navigate = useNavigate()
@@ -85,62 +89,6 @@ const post = () => {
   
   
 
-// Create Post
-
-
-const schema = yup.object().shape({
-  text: yup.string().required("Your Full Name is Required!"),
-  file: yup.mixed().test("file", "You need to provide a file", (value) => {
-    if (value.length > 0) {  
-      return true;
-    }
-    return false;
-    }),
-});
-
-const {register,handleSubmit,formState: { errors }} = useForm({
-  resolver: yupResolver(schema),
-});
-
-const postData = async (newPost) => {
-  try {
-    let { data } = await Axios.post('/api/post/createPost', newPost, { withCredentials: true })
-
-      return data
-      // console.log(user);
-  } catch (error) {
-    console.log(error);
-  }
-} 
-
-const { mutate: createPost, error: postError, isLoading: creatingPost, isError: postingError } = useMutation(postData, {
-  onSuccess: (successData) => { 
-    console.log(successData)
-    alert("post created successfully!")
-   }
-})
-
-// const onSubmit = data => console.log(data);
-//   console.log(errors);
-const onSubmit = (newPost) => {
-  console.log(newPost);
-  createPost(newPost)
-};
-
-const newPost= (
-  <form onSubmit={handleSubmit(onSubmit)}>
-          <input type="text" placeholder="What's on your mind..." {...register("text")} />
-          <p>{errors.text?.message}</p>
-
-          <label htmlFor="Image">Image: </label>
-          <input type="file" {...register('file')} />
-          {errors.file && <p>Please select an image</p>}
-
-
-
-          <input type="submit" />
-    </form>
-)
 
   
 
@@ -149,6 +97,61 @@ const newPost= (
   // console.log("all posts", posts);
   // console.log("wanted post", getPost);
   // console.log(user);
+
+// Add Comments
+// const commentSchema = yup.object().shape({
+//   comment: yup.string().required("Please enter a comment!"),
+// });
+// const { register: commmentRegister, handleSubmit: submitComment, formState: { errors: commentErr } } = useForm({
+//   resolver: yupResolver(commentSchema),
+// });
+
+// const onSubmitComment = ({comment}) => console.log(comment);
+//   console.log(commentErr);
+
+const postData = async (newPost) => {
+  try {
+    let { data } = await Axios.post(`/api/comment/createComment/${id}`, { comment: desc }, { withCredentials: true })
+
+      return data
+      // console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+} 
+
+const { mutate: addComment, error: postError, isLoading: creatingComment, isError: postingError } = useMutation(postData, {
+  onSuccess: (successData) => { 
+    console.log(successData)
+    alert("post created successfully!")
+   }
+})
+
+
+
+const handleCommSubmit = async (e) => {
+  e.preventDefault();
+  console.log(id, desc);
+  addComment({ comment: desc })
+}
+
+
+const comment = (
+  <div>
+  <StyledForm onSubmit={handleCommSubmit}>
+    <h3>add comment</h3>
+      <input
+          type="text"
+          placeholder="Short Description"
+          onChange={(e) => setDesc(e.target.value)}
+          required
+        />
+
+    <button>Create Comment</button>
+  </StyledForm>
+</div>
+)
+
 
 
    let content
@@ -166,12 +169,15 @@ const newPost= (
                 </div>
     }
 
+    console.log(data);
 
   return (
     <>
       {user && <h1>{user.userName} Posts page</h1>}
       { content }
-      { newPost }
+
+      <h1>Add comment</h1>
+      { comment }
       <Button onClick={addLike}>Like</Button>
       <Button primary onClick={deletePost}>delete</Button>
 
@@ -192,3 +198,48 @@ const Button = styled.button`
   padding: 0.25em 1em;
   cursor: ponter;
 `
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin-top: 2rem;
+  select,
+  input {
+    padding: 7px;
+    min-height: 30px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgb(182, 182, 182);
+    margin: 0.3rem 0;
+    &:focus {
+      border: 2px solid rgb(0, 208, 255);
+    }
+  }
+  select {
+    color: rgb(95, 95, 95);
+  }
+`;
+
+
+
+const StyledCreateProduct = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ImagePreview = styled.div`
+  margin: 2rem 0 2rem 2rem;
+  padding: 2rem;
+  border: 1px solid rgb(183, 183, 183);
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: rgb(78, 78, 78);
+  img {
+    max-width: 100%;
+  }
+`;

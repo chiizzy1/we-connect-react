@@ -9,6 +9,7 @@ import EditProfile from './routes/editProfile';
 import Post from './routes/post';
 import Profile from './routes/profile';
 import Feed from './routes/feed';
+import Home from "./routes/home";
 
 function App() {
   
@@ -24,8 +25,9 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/editProfile" element={<EditProfile />} />
+            <Route path="/editProfile/:id" element={<EditProfile />} />
             <Route path="/feed" element={<Feed />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/post/:id" element={<Post />} />
             <Route path="*" element={<h1> PAGE NOT FOUND</h1>} />
           </Routes>
