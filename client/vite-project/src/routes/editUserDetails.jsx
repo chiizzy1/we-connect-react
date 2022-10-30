@@ -1,8 +1,4 @@
-import { loggedUser } from '../features/user/userSlice';
-import { useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+
 
 // const editUserDetails = () => {
 //     const { user } = useSelector(loggedUser)
