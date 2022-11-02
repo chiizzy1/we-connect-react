@@ -1,22 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Root from "./routes/root";
-// import ErrorPage from "./error-page";
-import Navbar from "./Navbar"
-import Login from './routes/login';
-import SignUp from './routes/signUp';
-import EditProfile from './routes/editProfile';
-import Post from './routes/post';
-import Profile from './routes/profile';
-import Feed from './routes/feed';
-import Home from "./routes/home";
+import { Navbar } from "./components";
+import { Home, Feed, Login, SignUp, Root, EditProfile, Post, Profile, } from './routes';
 
-function App() {
-  
-  const client = new QueryClient();
 
-  return (
-    <div className="App">
+const client = new QueryClient();
+
+
+const App = () => (
+  <div className="bg-primary w-full overflow-hidden">
       <QueryClientProvider client={client}>
         <Router>
           <Navbar />
@@ -29,12 +21,11 @@ function App() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/home" element={<Home />} />
             <Route path="/post/:id" element={<Post />} />
-            <Route path="*" element={<h1> PAGE NOT FOUND</h1>} />
+            <Route path="*" element={<h1>Invalid URL...</h1>} />
           </Routes>
         </Router>
       </QueryClientProvider>
     </div>
-  )
-}
+)
 
 export default App

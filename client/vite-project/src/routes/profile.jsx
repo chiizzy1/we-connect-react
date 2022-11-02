@@ -137,7 +137,7 @@ const profile = () => {
     <>
       {user && <div>Welcome to Profile page: <h1>{user.userName}</h1> </div>}
       { <Link to={`/editProfile/${user._id}`}> <button>Edit Profile</button> </Link> }
-      {data && <div key={data[0]._id}>
+      {data.length  && <div key={data[0]._id}>
             <p>{data[0].text}</p>
             <Link to={`/post/${data[0]._id}`}>
               <img src={data[0].image} alt='img'/>

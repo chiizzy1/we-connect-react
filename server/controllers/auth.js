@@ -152,5 +152,5 @@ exports.postSignup = (req, res, next) => {
 
 exports.logout = (req,res) => {
   req.session.destroy();
-  res.redirect('/');
+  res.send('successfully loged out');
 };

@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
-import { setUser } from '../features/user/userSlice';
+import { setUserLogin } from '../features/user/userSlice';
 
 
 const login = () => {
@@ -44,7 +44,7 @@ const login = () => {
       const { mutate, error, isLoading, isError } = useMutation(postData, {
         onSuccess: (successData) => { 
           console.log("welcome", successData.user.userName)
-          dispatch(setUser(successData))
+          dispatch(setUserLogin(successData))
           navigate("/profile")
          }
       })
