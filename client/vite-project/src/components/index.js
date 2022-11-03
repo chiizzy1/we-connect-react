@@ -5,6 +5,7 @@ import Gallery from "./Gallery";
 import Testimonials from "./Testimonials";
 import Button from "./Button";
 import LinkButton from "./LinkButton";
+import Footer from "./Footer";
 
 export {
     Navbar,
@@ -14,4 +15,5 @@ export {
     Testimonials,
     Button,
     LinkButton,
+    Footer
 }

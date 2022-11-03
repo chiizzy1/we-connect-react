@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Navbar } from "./components";
+import { Navbar, Footer } from "./components";
 import { Home, Feed, Login, SignUp, Root, EditProfile, Post, Profile, } from './routes';
 
 
@@ -23,6 +23,7 @@ const App = () => (
             <Route path="/post/:id" element={<Post />} />
             <Route path="*" element={<h1>Invalid URL...</h1>} />
           </Routes>
+          <Footer />
         </Router>
       </QueryClientProvider>
     </div>

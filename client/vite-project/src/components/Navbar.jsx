@@ -11,7 +11,7 @@ import styles from "../style"
 
 
 const Navbar = () => {
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState("About");
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate()
   const dispatch = useDispatch()

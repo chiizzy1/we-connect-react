@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../style";
-import { Gallery, Hero, Services, Testimonials } from "../components";
+import { Footer, Gallery, Hero, Services, Testimonials } from "../components";
 
 const root = () => (
   <>
@@ -15,6 +15,7 @@ const root = () => (
           <Services />
           <Gallery />
           <Testimonials />
+          <Footer />
         </div>
       </div>
   </>
