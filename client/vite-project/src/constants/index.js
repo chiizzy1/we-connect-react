@@ -19,6 +19,12 @@ export const navLinks = [
   },
 ];
 
+export const services = [
+  {
+    icon: "",
+    text: "We take proactive steps make sure your information and transactions are secure."
+  }
+]
 // export const features = [
 //   {
 //     id: "feature-1",

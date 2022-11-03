@@ -46,7 +46,7 @@ const Navbar = () => {
       <div className={`${styles.boxWidth}`}>
           <nav className="w-full flex py-6 justify-between items-center navbar">
 
-            <div className="text-white">9jaConnect</div>
+            <div className="text-gradient">9jaConnect</div>
             {/* Desktop View */}
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">
               {navLinks.map((nav, index) => (

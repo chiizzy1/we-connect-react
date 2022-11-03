@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../style";
-import { Hero  } from "../components";
+import { Gallery, Hero, Services  } from "../components";
 
 const root = () => (
   <>
@@ -12,7 +12,8 @@ const root = () => (
 
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          
+          <Services />
+          <Gallery />
         </div>
       </div>
   </>
