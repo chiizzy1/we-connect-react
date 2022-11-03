@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../style";
-import { Gallery, Hero, Services  } from "../components";
+import { Gallery, Hero, Services, Testimonials } from "../components";
 
 const root = () => (
   <>
@@ -14,6 +14,7 @@ const root = () => (
         <div className={`${styles.boxWidth}`}>
           <Services />
           <Gallery />
+          <Testimonials />
         </div>
       </div>
   </>
