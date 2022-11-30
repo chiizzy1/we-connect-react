@@ -1,13 +1,13 @@
 import Axios  from 'axios';
 import { loggedUser } from '../features/user/userSlice';
-import { useSelector } from 'react-redux';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch  } from 'react-redux';
 import { setPosts } from '../features/posts/postsSlice';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import styles from '../style';
+import { ProfilePageCard } from '../components';
 
 
 
@@ -140,14 +140,20 @@ const profile = () => {
     <div className={`${styles.flexCenter} ${styles.paddingX} ${styles.paddingY} text-cyan-500 flex-col`}>
       {user && <div>Welcome to Profile page: <h1>{user.userName}</h1> </div>}
       { <Link to={`/editProfile/${user._id}`}> <button>Edit Profile</button> </Link> }
-      {data && data.map((post, index) => (
-        <div key={post._id}>
-            <p>{post.text}</p>
+
+      <div className="grid grid-cols-4 gap-8">
+          {data && data.map((post, index) => (
             <Link to={`/post/${post._id}`}>
-              <img src={post.image} alt='img'/>
-            </Link>
-          </div>
-      ))}
+              <ProfilePageCard 
+                id={post._id}
+                text={post.text}
+                image={post.image}
+              />
+            </Link>  
+          ))}
+      </div>
+      
+
       { newPost }
     </div>
   )

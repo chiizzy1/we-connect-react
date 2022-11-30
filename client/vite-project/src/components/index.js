@@ -9,6 +9,12 @@ import Footer from "./Footer";
 import FeedbackCard from "./FeedbackCard";
 import FeedCard from "./feedCard";
 import ProfilePageCard from "./ProfilePageCard";
+import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSideBar";
+
+
+
+
 
 export {
     Navbar,
@@ -22,4 +28,6 @@ export {
     FeedbackCard,
     FeedCard,
     ProfilePageCard,
+    LeftSideBar,
+    RightSideBar,
 }
