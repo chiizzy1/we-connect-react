@@ -6,6 +6,9 @@ import Testimonials from "./Testimonials";
 import Button from "./Button";
 import LinkButton from "./LinkButton";
 import Footer from "./Footer";
+import FeedbackCard from "./FeedbackCard";
+import FeedCard from "./feedCard";
+import ProfilePageCard from "./ProfilePageCard";
 
 export {
     Navbar,
@@ -15,5 +18,8 @@ export {
     Testimonials,
     Button,
     LinkButton,
-    Footer
+    Footer,
+    FeedbackCard,
+    FeedCard,
+    ProfilePageCard,
 }

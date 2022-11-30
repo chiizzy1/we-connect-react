@@ -21,7 +21,7 @@
             
         </div>
 
-        <div className={`object-contain md:object-scale-down overflow-hidden h-96 w-96`}>
+        <div className={`object-contain md:object-scale-down overflow-hidden h-96 w-96 rounded-xl`}>
                 <img src={students} alt="students" className="w-[100%] h-[100%]" />
         </div>
     </section>

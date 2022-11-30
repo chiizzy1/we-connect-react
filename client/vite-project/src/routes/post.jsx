@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
+import styles from "../style";
 
 
 const post = () => {
@@ -142,7 +143,7 @@ const comment = (
     <h3>add comment</h3>
       <input
           type="text"
-          placeholder="Short Description"
+          placeholder="Add a commment..."
           onChange={(e) => setDesc(e.target.value)}
           required
         />
@@ -162,26 +163,31 @@ const comment = (
     } else {
       const { post, comments } = data
       // console.log(post);
-        content = <div key={post._id}>
-                      <p>{post.text}</p>
+        content = <div className="flex flex-col gap-8" key={post._id}>
+                      <h1 className="font-bold text-lg">{post.text}</h1>
                       <img src={post.image} alt='img'/>
-                      <h1>your post has: {post.likes} like</h1>
+                      <h1 className="font-bold text-lg">your post has: {post.likes} like</h1>
                 </div>
     }
 
-    console.log(data);
+    console.log(user);
 
   return (
-    <>
-      {user && <h1>{user.userName} Posts page</h1>}
-      { content }
-
-      <h1>Add comment</h1>
-      { comment }
-      <Button onClick={addLike}>Like</Button>
-      <Button primary onClick={deletePost}>delete</Button>
-
-    </>
+    <div className={`${styles.flexCenter} ${styles.paddingX} ${styles.paddingY} text-red-600 grid grid-cols-2 gap-8`}>
+     
+      <div className="flex flex-col">
+          {user && <h1>{user.userName} Posts page</h1>}
+          { content }
+      </div>
+      
+      <div className="flex flex-col">
+        <h1>Add comment</h1>
+        { comment }
+        <Button onClick={addLike}>Like</Button>
+        <Button primary onClick={deletePost}>delete</Button>
+      </div>
+  
+    </div>
     
   )
 }

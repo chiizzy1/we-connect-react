@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import styles from '../style';
+
+
 
 const profile = () => {
   const [desc, setDesc] = useState("");
@@ -134,17 +137,19 @@ const profile = () => {
 
 
   return (
-    <>
+    <div className={`${styles.flexCenter} ${styles.paddingX} ${styles.paddingY} text-cyan-500 flex-col`}>
       {user && <div>Welcome to Profile page: <h1>{user.userName}</h1> </div>}
       { <Link to={`/editProfile/${user._id}`}> <button>Edit Profile</button> </Link> }
-      {data.length  && <div key={data[0]._id}>
-            <p>{data[0].text}</p>
-            <Link to={`/post/${data[0]._id}`}>
-              <img src={data[0].image} alt='img'/>
+      {data && data.map((post, index) => (
+        <div key={post._id}>
+            <p>{post.text}</p>
+            <Link to={`/post/${post._id}`}>
+              <img src={post.image} alt='img'/>
             </Link>
-          </div>}
+          </div>
+      ))}
       { newPost }
-    </>
+    </div>
   )
 }
 

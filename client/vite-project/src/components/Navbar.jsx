@@ -45,8 +45,8 @@ const Navbar = () => {
     <div className={`${styles.paddingX} ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
           <nav className="w-full flex py-6 justify-between items-center navbar">
-
-            <div className="text-gradient">9jaConnect</div>
+            <Link to="/"><div className="font-poppins text-gradient font-bold cursor-pointer text-[30px]">9jaConnect</div></Link>
+            
             {/* Desktop View */}
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">
               {navLinks.map((nav, index) => (
