@@ -11,10 +11,12 @@ import FeedCard from "./feedCard";
 import ProfilePageCard from "./ProfilePageCard";
 import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
-
-
-
-
+import LeftSide from "./HomeComponents/LeftSide";
+import Middle from "./HomeComponents/Middle";
+import RightSide from "./HomeComponents/RightSide";
+import LogoSearch from "./LogoSearch";
+import ProfileCard from "./ProfileCard";
+import FollowersCard from "./FollowersCard";
 
 export {
     Navbar,
@@ -30,4 +32,9 @@ export {
     ProfilePageCard,
     LeftSideBar,
     RightSideBar,
+    LeftSide,
+    Middle,
+    RightSide,
+    LogoSearch,
+    ProfileCard
 }
