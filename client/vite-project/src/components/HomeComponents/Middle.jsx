@@ -1,8 +1,13 @@
 import React from 'react'
+import Feed from '../Feed'
+import NewPost from '../NewPost'
 
 const Middle = () => {
   return (
-    <div>Middle</div>
+    <div className="flex text-white flex-col gap-4 h-screen overflow-auto">
+      <NewPost />
+      <Feed />
+    </div>
   )
 }
 

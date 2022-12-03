@@ -6,7 +6,7 @@ import * as IoIcons from 'react-icons/io';
 
 const LogoSearch = () => {
   return (
-    <div className='flex gap-3 p-4'>
+    <div className='flex gap-3 p-2'>
         <div className="font-poppins text-gradient cursor-pointer text-[18px]">9jaConnect</div>
         <div className="flex rounded-sm bg-cyan-700">
             <input type="text" className='bg-transparent border-0 outline-0' placeholder='#Explore' />

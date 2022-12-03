@@ -17,6 +17,8 @@ import RightSide from "./HomeComponents/RightSide";
 import LogoSearch from "./LogoSearch";
 import ProfileCard from "./ProfileCard";
 import FollowersCard from "./FollowersCard";
+import Feed from "./Feed";
+import NewPost from "./NewPost";
 
 export {
     Navbar,
@@ -36,5 +38,7 @@ export {
     Middle,
     RightSide,
     LogoSearch,
-    ProfileCard
+    ProfileCard,
+    Feed,
+    NewPost,
 }

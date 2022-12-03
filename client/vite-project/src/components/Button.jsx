@@ -1,6 +1,6 @@
 
-const Button = ({ styles, text }) => (
-    <button type="button" className={`py-4 px-6 font-poppins font-medium text-[18px] text-primary bg-blue-gradient rounded-[10px] outline-none ${styles}`}>
+const Button = ({ style, text }) => (
+    <button type="button" className={`font-poppins font-sm text-[18px] text-primary bg-slate-400 hover:bg-orange-700 rounded-[10px] outline-none ${style}`}>
       { text }
     </button>
 );
