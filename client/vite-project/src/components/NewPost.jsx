@@ -56,9 +56,9 @@ const NewPost = () => {
                 </div>
             </div>
             {image && (
-                <div className="flex  gap-4 w-72 h-72">
-                    <GiTireIronCross className="text-red-200"/>
-                    <img src={image.image} alt="img-preview" className="w-full"/>
+                <div className="flex  gap-4 w-72 h-72 relative">
+                    <GiTireIronCross className="text-white absolute right-4 top-2 cursor-pointer" onClick={() => setImage(null)} />
+                    <img src={image.image} alt="img-preview" className="w-full max-h-80 object-cover rounded-lg"/>
                 </div>
             )}
         </div>

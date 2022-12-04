@@ -19,6 +19,8 @@ import ProfileCard from "./ProfileCard";
 import FollowersCard from "./FollowersCard";
 import Feed from "./Feed";
 import NewPost from "./NewPost";
+import Post from "./Post";
+import TrendCard from "./TrendCard";
 
 export {
     Navbar,
@@ -41,4 +43,6 @@ export {
     ProfileCard,
     Feed,
     NewPost,
+    Post,
+    TrendCard,
 }

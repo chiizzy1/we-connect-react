@@ -1,4 +1,4 @@
-import { people01, people02, people03, facebook, instagram, linkedin, twitter, } from "../assets";
+import { people01, people02, students, people03, facebook, instagram, linkedin, twitter, } from "../assets";
 //  airbnb, binance, coinbase, dropbox, send, shield, star
 
 
@@ -59,6 +59,9 @@ export const feedback = [
     name: "Herman Jensen",
     title: "Founder & Leader",
     img: people01,
+    image: students,
+    likes: 400,
+    liked: true,
   },
   {
     id: "feedback-2",
@@ -67,6 +70,9 @@ export const feedback = [
     name: "Steve Mark",
     title: "Founder & Leader",
     img: people02,
+    image: students,
+    likes: 2000,
+    liked: false,
   },
   {
     id: "feedback-3",
@@ -75,6 +81,9 @@ export const feedback = [
     name: "Kenn Gallagher",
     title: "Founder & Leader",
     img: people03,
+    image: students,
+    likes: 10,
+    liked: true,
   },
 ];
 
@@ -95,6 +104,28 @@ export const feedback = [
 //     value: "$230M+",
 //   },
 // ];
+export const TrendData = [
+  {
+    name: "Content",
+    shares: 29,
+  },
+  {
+    name: "How it Works",
+    shares: 390,
+  },
+  {
+    name: "Create",
+    shares: 251,
+  },
+  {
+    name: "Explore",
+    shares: 1000,
+  },
+  {
+    name: "Terms & Services",
+    shares:3499,
+  },
+]
 
 export const footerLinks = [
   {
