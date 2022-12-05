@@ -4,7 +4,7 @@ const ProfileCard = () => {
   return (
         <div className="flex flex-col overflow-hidden bg-slate-600 rounded-lg w-full">
             <div className="flex relative items-center justify-center flex-col">
-                <img src={students} alt="user-img" className="w-full " />
+                <img src={students} alt="user-img" className="w-full max-h-48" />
                 <img src={students} alt='cover-img' className="absolute w-24 rounded-full -bottom-12 "/>
             </div>
 
