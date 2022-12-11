@@ -84,7 +84,7 @@ exports.postSignup = (req, res, next) => {
       validationErrors.push({ msg: "Passwords do not match" });
   
     if (validationErrors.length) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: validationErrors,
         error,
       });
@@ -92,22 +92,8 @@ exports.postSignup = (req, res, next) => {
     req.body.email = validator.normalizeEmail(req.body.email, {
       gmail_remove_dots: false,
     });
-  
-    const user = new User({
-      userName: req.body.userName,
-      email: req.body.email,
-      password: req.body.password,
-      profilePic : "/img/profileImg.png",
-      cloudinaryId : "",
-      country : "",
-      city: "", 
-      campus : "",
-      sex : "",
-      linkedin : "",
-      twitter : "",
-      mobile : 0000,
-      description : "",
-    });
+    
+    const user = new User(req.body);
   
     User.findOne(
       { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
@@ -116,7 +102,7 @@ exports.postSignup = (req, res, next) => {
           return next(err);
         }
         if (existingUser) {
-          return res.status(500).send({
+          return res.status(500).json({
             message: "Account with that email address or username already exists.",
           });
         }
@@ -128,7 +114,7 @@ exports.postSignup = (req, res, next) => {
             if (err) {
               return next(err);
             }
-            res.status(201).send({
+            res.status(201).json({
               message: "User Created Successfully",
               user,
             });

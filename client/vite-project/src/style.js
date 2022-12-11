@@ -13,6 +13,11 @@ const styles = {
   
     marginX: "sm:mx-16 mx-6",
     marginY: "sm:my-16 my-6",
+
+    formAuthButton: "font-poppins font-sm text-[18px] text-primary bg-slate-400 hover:bg-orange-700 rounded-[10px] outline-none",
+    formLabelStyles: "block text-gray-700 text-sm font-bold mb-2",
+    formErrorStyles: "text-red-500 text-xs italic",
+    formInputStyles: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
   };
   
   export const layout = {

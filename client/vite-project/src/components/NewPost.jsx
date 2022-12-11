@@ -5,21 +5,85 @@ import { AiOutlinePlayCircle, AiOutlineSchedule } from "react-icons/ai";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { GiTireIronCross } from "react-icons/gi";
 import Button from "./Button";
+import Axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { loggedUser } from '../features/user/userSlice';
+import { useSelector, useDispatch  } from 'react-redux';
+import { setPosts } from '../features/posts/postsSlice';
+import { Link } from 'react-router-dom';
+import styles from "../style";
 
+ 
 
 const NewPost = () => {
 
     const [image, setImage] = useState(null);
     const imageRef = useRef();
+    const desc = useRef();
 
-    const onImageChange = (e) =>{
-        if (e.target.files && e.target.files[0]) {
-            let img = e.target.files[0];
-            setImage({
-                image: URL.createObjectURL(img),
-            });
+
+    const { user } = useSelector(loggedUser)
+    const dispatch = useDispatch()
+    
+    // Create New Post
+
+    const newPost = async () => {
+        try {
+        let { data } = await Axios.post('/api/post/createPost', { text: desc.current.value, image: image, userId: user._id }, { withCredentials: true })
+    
+            return data
+            // console.log(user);
+        } catch (error) {
+        console.log(error);
         }
-    }
+    } 
+    
+    const { mutate, error, isLoading, isError } = useMutation(newPost, {
+        onSuccess: (successData) => { 
+        console.log(successData)
+            alert("post created successfully!")
+        }
+    })
+
+
+    const onImageChange = (e) => {
+        const file = e.target.files[0];
+      
+        console.log(file);
+        TransformFileData(file);
+      };
+      
+      
+      const TransformFileData = (file) => {
+        const reader = new FileReader();
+      
+        if (file) {
+          reader.readAsDataURL(file);
+          reader.onloadend = () => {
+            setImage(reader.result);
+          };
+        } else {
+          setImage("");
+        }
+      };
+      
+    //   if (isError) {
+    //     return <div>Error! {error.message}</div>;
+    //   }
+    
+    //   if (isLoading) {
+    //     return <h1> Loading...</h1>;
+    //   }
+
+
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log( desc.current.value, image, user._id);
+        mutate({ text: desc.current.value, image: image, userId: user._id })
+      }
+
+
 
   return (
     <div className="flex gap-4 p-4 rounded-md bg-cyan-900">
@@ -29,7 +93,9 @@ const NewPost = () => {
                 type="text" 
                 name="" id="" 
                 placeholder="Make a Post"
-                className="rounded p-2 border-0 text-lg outline-0"
+                className="rounded p-2 border-0 text-lg outline-0 text-black"
+                ref={desc}
+                required
             />
             
             <div className="flex justify-around ">
@@ -49,19 +115,20 @@ const NewPost = () => {
                     <AiOutlineSchedule className="text-2xl text-yellow-500" />
                     <p>Schedule</p>
                 </div>
-                <Button style="py-2 px-4" text="Share" />
+                {/* <Button style="py-2 px-4" text="Share" /> */}
+                <button className="py-2 px-4 bg-green-600" onClick={handleSubmit}>share</button>
                 {/* File Input */}
                 <div className="hidden">
-                    <input type="file" name="myImage" ref={imageRef} onChange={onImageChange} />
+                    <input type="file" name="postImage" ref={imageRef} onChange={onImageChange} />
                 </div>
             </div>
             {image && (
                 <div className="flex  gap-4 w-72 h-72 relative">
-                    <GiTireIronCross className="text-white absolute right-4 top-2 cursor-pointer" onClick={() => setImage(null)} />
-                    <img src={image.image} alt="img-preview" className="w-full max-h-80 object-cover rounded-lg"/>
+                    <GiTireIronCross className="text-red-600 absolute right-4 top-2 cursor-pointer" onClick={() => setImage(null)} />
+                    <img src={image} alt="img-preview" className="w-full max-h-72 object-cover rounded-lg"/>
                 </div>
             )}
-        </div>
+        </div> 
     </div>
   )
 }

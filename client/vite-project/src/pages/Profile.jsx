@@ -1,4 +1,4 @@
-import { Middle, ProfileCard, ProfileLeft } from "../components";
+import { Middle, ProfileCard, ProfileLeft, RightSide } from "../components";
 import "./Layout.css";
 
 
@@ -7,9 +7,10 @@ const Profile = () => {
     <div className='text-white relative layout-grid '>
         <ProfileLeft />
         <div className="flex flex-col">
-            <ProfileCard />
+            <ProfileCard location="profilePage" />
             <Middle />
         </div>
+        <RightSide />
     </div>
   )
 }

@@ -23,6 +23,7 @@ import Post from "./Post";
 import TrendCard from "./TrendCard";
 import ProfileLeft from "./ProfileLeft";
 import InfoCard from "./InfoCard";
+import ProfileModal from "./ProfileModal";
 
 export {
     Navbar,
@@ -49,4 +50,5 @@ export {
     TrendCard,
     ProfileLeft,
     InfoCard,
+    ProfileModal,
 }

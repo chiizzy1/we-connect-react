@@ -2,49 +2,39 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  userName: { type: String, unique: true },
+  userName: { type: String, required: true },
   email: { type: String, unique: true },
-  password: String,
-  profilePic: {
-    type: String,  
-    require: false,
+  password: {
+    type: String,    
+    require: true,    
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
   },
   cloudinaryId: {
     type: String,    
     require: false,    
   },
-  country: {
-    type: String,
-    required: false,
+  isAdmin: {
+    type: Boolean,
+    default: false,
   },
-  city: {
-    type: String,
-    required: false,
-  },
-  campus: {
-    type: String,
-    required: false,
-  }, 
-  sex: {
-    type: String,
-    required: false,
-  },
-  linkedin: {
-    type: String,
-    required: false,
-  },
-  twitter: {
-    type: String,
-    required: false,
-  },
-  mobile: {
-    type: Number,
-    required: false,
-  },
-  description: {
-    type: String,
-    required: false,
-  },
+  profilePic: String,
+  country: String,
+  city: String,
+  campus: String, 
+  sex: String,
+  linkedin: String,
+  twitter: String,
+  mobile: Number,
+  description: String,
+  followers: [],
+  following: [],
   editedAt: {
     type: Date,
     default: Date.now,

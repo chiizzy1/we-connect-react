@@ -41,7 +41,7 @@ const post = () => {
 
   const likePost = async () => {
       try {
-        const { data } = await Axios.put(`/api/post/likePost/${id}`,  { withCredentials: true })
+        const { data } = await Axios.put(`/api/post/likePost/${id}`, { userId: user._id },  { withCredentials: true })
         return data
       } catch (error) {
         console.log(error);
@@ -65,7 +65,7 @@ const post = () => {
   // Delete Post
   const deletePostReq = async () => {
       try {
-          const { data } = await Axios.delete(`/api/post/deletePost/${id}`,  { withCredentials: true })
+          const { data } = await Axios.delete(`/api/post/deletePost/${id}`, { userId: user._id }, { withCredentials: true })
           return data
       } catch (error) {
           console.log(error);

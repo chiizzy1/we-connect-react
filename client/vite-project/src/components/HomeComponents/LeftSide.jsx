@@ -7,7 +7,7 @@ const LeftSide = () => {
   return (
     <div className='flex text-white flex-col gap-4 items-center overflow-auto'>
       <LogoSearch />
-      <ProfileCard />
+      <ProfileCard location="homePage" />
       <FollowersCard />
     </div>
   )

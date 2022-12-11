@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema({
     require: false,
   },
   likes: {
-    type: Number,
+    type: [],
     required: true,
   },
   user: {
@@ -25,6 +25,10 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+},
+{
+  timestamps: true,
+}
+);
 
 module.exports = mongoose.model("Post", PostSchema);

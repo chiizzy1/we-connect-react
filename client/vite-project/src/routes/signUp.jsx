@@ -20,6 +20,8 @@ const signUp = () => {
   // Handle Form with Yup
   const schema = yup.object().shape({
     userName: yup.string().required("User Name cannot be empty!"),
+    firstName: yup.string().required("User Name cannot be empty!"),
+         lastName: yup.string().required("User Name cannot be empty!"),
     email: yup.string().email().required("Please enter a valid email address"),
     password: yup.string().min(4).max(20).required(),
     confirmPassword: yup
@@ -36,9 +38,9 @@ const signUp = () => {
 
   // Make Post Rrequest to our backend
 
-  const postData = async ({ userName, email, password, confirmPassword }) => {
+  const postData = async ({ firstName, lastName, userName, email, password, confirmPassword }) => {
     try {
-      let { data } = await Axios.post('/api/signup', { userName, email, password, confirmPassword }, { withCredentials: true })
+      let { data } = await Axios.post('/api/signup', { firstName, lastName, userName, email, password, confirmPassword }, { withCredentials: true })
 
         return data
         // console.log(user);
@@ -49,9 +51,9 @@ const signUp = () => {
 
   const { mutate, error, isLoading, isError } = useMutation(postData, {
     onSuccess: (successData) => { 
-      console.log(successData.message)
-      dispatch(setUserLogin(successData.user))
-      navigate("/profile")
+      console.log(successData)
+      // dispatch(setUserLogin(successData.user))
+      // navigate("/profile")
      }
   })
 
@@ -65,9 +67,9 @@ const signUp = () => {
   }
 
 
-  const onSubmit = ({ userName, email, password, confirmPassword }) => {
+  const onSubmit = ({ firstName, lastName, userName, email, password, confirmPassword }) => {
     console.log(email, password);
-    mutate({ userName, email, password, confirmPassword })
+    mutate({ firstName, lastName, userName, email, password, confirmPassword })
   };
 
 
@@ -83,6 +85,18 @@ const signUp = () => {
                         <label>User Name</label>
                         <input type="text" placeholder="User Name..." {...register("userName")} className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'/>
                         <p>{errors.userName?.message}</p>
+                      </div>
+
+                      <div className='flex flex-col text-gray-400 py-2'>
+                        <label>User Name</label>
+                        <input type="text" placeholder="First Name..." {...register("firstName")} className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'/>
+                        <p>{errors.firstName?.message}</p>
+                      </div>
+
+                      <div className='flex flex-col text-gray-400 py-2'>
+                        <label>User Name</label>
+                        <input type="text" placeholder="Last Name..." {...register("lastName")} className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'/>
+                        <p>{errors.lastName?.message}</p>
                       </div>
                       
 

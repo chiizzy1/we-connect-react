@@ -60,9 +60,9 @@ const login = () => {
       }
 
 
-      const onSubmit = ({email, password}) => {
-        console.log(email, password);
-        mutate({ email: email,  password: password })
+      const onSubmit = (data) => {
+        console.log(data);
+        // mutate({ email: email,  password: password })
       };
     
       return (

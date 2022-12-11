@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 
 module.exports = {
-    getFeed: async (req, res) => {
+  getFeed: async (req, res) => {
         try {
           const posts = await Post.find().sort({ createdAt: "desc" }).lean();
           res.send(posts);
@@ -13,7 +13,7 @@ module.exports = {
           res.send(err);
         }
     },
-    getProfile: async (req, res) => {
+  getProfile: async (req, res) => {
       try {
         const posts = await Post.find({ user: req.user.id });
         res.send({ posts: posts });
@@ -22,45 +22,56 @@ module.exports = {
         console.log(err);
       }
     },
-    getPost: async (req, res) => {
+  getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
       res.send({ post: post, comments: comments });
-    } catch (err) {
-      res.send(err);
+    } catch (error) {
+      res.status(500).json(error);
     }
   },
+
   likePost: async (req, res) => {
+    const id = req.params.id;
+    const { userId } = req.body;
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.send(`Like added`);
-    } catch (err) {
-      console.log(err);
+      const post = await Post.findById(id);
+      if (post.likes.includes(userId)) {
+        await post.updateOne({ $pull: { likes: userId } });
+        res.status(200).json("Post disliked");
+      } else {
+        await post.updateOne({ $push: { likes: userId } });
+        res.status(200).json("Post liked");
+      }
+    } catch (error) {
+      res.status(500).json(error);
     }
   },
+
   deletePost: async (req, res) => {
     try {
       // Find post by id
+      const { userId } = req.body;
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.send("Post deleted successfully");
+      if (post.user === userId) {
+        await post.deleteOne();
+        res.status(200).json("Post deleted.");
+      } else {
+        res.status(403).json("Unauthorized access");
+      }
     } catch (err) {
-      res.send(err);
+      res.status(500).json(err);
     }
   },
+
   createPost: async (req, res) => {
+
     const { text, image } = req.body;
+    // const newPost = new Post(req.body);
 
     try {
       if (image){
@@ -71,16 +82,15 @@ module.exports = {
             text: text,
             image: result.secure_url,
             cloudinaryId: result.public_id,
-            likes: 0,
+            likes: [],
             user: req.user.id,
           });
           
-          res.send("post created successful");
         }
       }
+      res.status(200).json("post created successful");
     } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
+      res.status(500).json(error);
     }
   },
 }
