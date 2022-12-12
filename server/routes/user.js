@@ -8,7 +8,7 @@ router.get('/:id', userController.getUser);
 router.get('/', userController.getAllUsers)
 router.put('/:id', ensureAuth,  userController.updateUser)
 router.delete('/:id', ensureAuth,  userController.deleteUser)
-router.put('/:id/follow', ensureAuth,  userController.followUser)
+router.put('/follow/:id', ensureAuth,  userController.followUser)
 router.put('/:id/unfollow', ensureAuth,  userController.unfollowUser)
 
 

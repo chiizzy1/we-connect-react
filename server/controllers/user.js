@@ -38,9 +38,9 @@ module.exports = {
   updateUser: async (req, res) => {
     const id = req.params.id;
     // console.log("Data Received", req.body)
-    const { _id, currentUserAdmin, password } = req.body;
+    const { userId, currentUserAdmin, password } = req.body;
     
-    if (id === _id) {
+    if (id === userId) {
       try {
         // if we also have to update password then password will be bcrypted again
         if (password) {
@@ -52,7 +52,7 @@ module.exports = {
           new: true,
         });
       //   const token = jwt.sign(
-      //     { username: user.username, id: user._id },
+      //     { username: user.username, id: user.userId },
       //     process.env.JWTKEY,
       //     { expiresIn: "1h" }
       //   );
@@ -86,21 +86,24 @@ module.exports = {
   },
   followUser: async (req, res) => {
     const id = req.params.id;
-    const { _id } = req.body;
-    console.log(id, _id)
-    if (_id == id) {
+    const { userId } = req.body;
+    console.log(id, userId)
+    
+    if (userId == id) {
       res.status(403).json("Action Forbidden");
     } else {
       try {
         const followUser = await User.findById(id);
-        const followingUser = await User.findById(_id);
+        const followingUser = await User.findById(userId);
   
-        if (!followUser.followers.includes(_id)) {
-          await followUser.updateOne({ $push: { followers: _id } });
+        if (!followUser.followers.includes(userId)) {
+          await followUser.updateOne({ $push: { followers: userId } });
           await followingUser.updateOne({ $push: { following: id } });
           res.status(200).json("User followed!");
         } else {
-          res.status(403).json("you are already following this id");
+          await followUser.updateOne({ $pull: { followers: userId } });
+          await followingUser.updateOne({ $pull: { following: id } });
+          res.status(200).json("User Unfollowed!");
         }
       } catch (error) {
         console.log(error)
@@ -110,21 +113,21 @@ module.exports = {
   },
   unfollowUser: async (req, res) => {
     const id = req.params.id;
-    const { _id } = req.body;
+    const { userId } = req.body;
   
-    if(_id === id)
+    if(userId === id)
     {
       res.status(403).json("Action Forbidden")
     }
     else{
       try {
         const unFollowUser = await User.findById(id)
-        const unFollowingUser = await User.findById(_id)
+        const unFollowingUser = await User.findById(userId)
   
   
-        if (unFollowUser.followers.includes(_id))
+        if (unFollowUser.followers.includes(userId))
         {
-          await unFollowUser.updateOne({$pull : {followers: _id}})
+          await unFollowUser.updateOne({$pull : {followers: userId}})
           await unFollowingUser.updateOne({$pull : {following: id}})
           res.status(200).json("Unfollowed Successfully!")
         }

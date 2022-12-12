@@ -8,7 +8,7 @@ import Axios from 'axios';
 
 const Post = ({post}) => {
   const { user } = useSelector(loggedUser);
-  const queryClient = useQueryClient();
+  
 
 
 

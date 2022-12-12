@@ -5,15 +5,15 @@ const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
     updateUserDetails: async (req, res) => {
-        const { profilePic, userName, country, city, campus, sex, twitter, linkedIn, mobile, description } = req.body
+        const { profilePic, formData } = req.body;
+        const { userName, firstName, lastName, country, city, campus, sex, twitter, linkedIn, mobile, description } = formData
 
         try {
-            console.log(req.body);
             if (profilePic){
                 const result = await cloudinary.uploader.upload(profilePic);
 
                 if(result){
-                    await User.findOneAndUpdate(
+                   const user =  await User.findOneAndUpdate(
                         { _id: req.params.id },
                         {
                           $set: {
@@ -28,11 +28,13 @@ module.exports = {
                             "linkedin" : linkedIn,
                             "mobile" : mobile,
                             "description" : description,
+                            "firstName": firstName,
+                            "lastName": lastName
                           },
                         }
-                      );
+                        ); 
+                        res.status(200).send(user);
                 }
-                res.status(200).send("User Profile edited Successfully");
             }
             else{ res.send("please upload a pic")}
 
