@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { loggedUser } from '../features/user/userSlice';
 import { useSelector, useDispatch  } from 'react-redux';
 import { useState } from "react";
-
+import styles from "../style";
 
 
 
@@ -39,8 +39,8 @@ const FollowersCard = () => {
 
 
   return (
-    <div className="w-full rounded-lg flex flex-col max-h-40 gap-4">
-        <h3>People you may know</h3>
+    <div className={`font-poppins w-full rounded flex flex-col gap-4  ${styles.glassM}`}>
+        <h3 className={`${styles.h3Style}`}>People you may know</h3>
         
         {people.map((person) => (
             person._id !== user._id && <Followers person={person} />

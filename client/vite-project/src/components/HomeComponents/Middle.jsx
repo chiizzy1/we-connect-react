@@ -4,7 +4,7 @@ import NewPost from '../NewPost'
 
 const Middle = () => {
   return (
-    <div className="flex text-white flex-col gap-4 h-screen overflow-auto">
+    <div className="font-poppins text-white flex flex-col gap-4 h-screen overflow-auto pb-8">
       <NewPost />
       <Feed />
     </div>

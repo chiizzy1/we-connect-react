@@ -22,6 +22,6 @@ router.get("/profile", postsController.getProfile);
 // Feeds page
 router.get("/feed", postsController.getFeed);
 // Logout Page
-router.get("/logout", authController.logout);
+// router.get("/logout", authController.logout);
 
 module.exports = router

@@ -5,7 +5,7 @@ import LogoSearch from './LogoSearch'
 
 const ProfileLeft = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4 h-screen overflow-auto pb-8">
         <LogoSearch />
         <InfoCard />
         <FollowersCard />

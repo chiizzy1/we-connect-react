@@ -5,7 +5,7 @@ import FollowersCard from '../FollowersCard'
 
 const LeftSide = () => {
   return (
-    <div className='flex text-white flex-col gap-4 items-center overflow-auto'>
+    <div className='flex text-white flex-col gap-4 h-screen overflow-auto pb-8'>
       <LogoSearch />
       <ProfileCard location="homePage" />
       <FollowersCard />

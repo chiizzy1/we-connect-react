@@ -11,6 +11,13 @@ module.exports = {
         dimBlue: "rgba(9, 151, 124, 0.1)",
         darkPurple: "#081A51",
         lightWhite: "rgba(255,255,255,0.17)",
+        buttonColor: {
+          DEFAULT: "#C1F8CF",
+          dark: "#82C3EC"
+        },
+        cardBg: "#3D3C42",
+        fromGradient: "#0A1931",
+        toGradient: "#4CACBC"
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

@@ -210,7 +210,7 @@ const ProfileModal = ({modalState, setModalState, data}) => {
             <div className="flex flex-wrap -mx-3 mb-6">
                 <div className={`w-full sm:w-1/2  px-3 mb-6 sm:mb-0`}> 
                   <input
-                    type="text"
+                    type="number"
                     placeholder="mobile"
                     value={formData.mobile}
                     name="mobile"

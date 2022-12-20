@@ -44,9 +44,9 @@ const Feed = () => {
 
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex relative flex-col gap-4">
         {userData.map((post) => (
-           <Post post={post}  />
+           <Post post={post} description="home" />
         ))}
     </div>
   )

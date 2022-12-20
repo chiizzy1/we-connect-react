@@ -4,13 +4,13 @@ import { useSelector, useDispatch  } from 'react-redux';
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Axios from 'axios';
+import { userIcon } from '../assets';
 
 
 const Followers = ({person}) => {
   const { user } = useSelector(loggedUser);
   const [follow, setFollow] = useState(person.followers.includes(user._id));
 
-  
 
   const followUser = async () => {
     try {
@@ -39,10 +39,9 @@ const Followers = ({person}) => {
     <div className='flex justify-between items-center ' key={person._id}>
         
         <div className="flex gap-1">
-            <img src={person.profilePic} alt="user-img" className='h-12 w-12 rounded-full'/>
+            <img src={person.profilePic? person.profilePic : userIcon} alt="user-img" className='h-12 w-12 rounded-full'/>
             <div className="flex flex-col items-start justify-center">
-                <span className="">{person.firstName} {person.lastName}</span>
-                <span className=""></span>
+                <span className="">{person.userName}</span>
             </div>
         </div>
 

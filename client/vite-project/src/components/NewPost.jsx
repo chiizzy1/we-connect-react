@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { students } from "../assets";
+import { userIcon } from '../assets';
 import { TfiGallery } from "react-icons/tfi";
 import { AiOutlinePlayCircle, AiOutlineSchedule } from "react-icons/ai";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -40,7 +40,7 @@ const NewPost = () => {
     
     const { mutate, error, isLoading, isError } = useMutation(newPost, {
         onSuccess: (successData) => { 
-        console.log(successData)
+        // console.log(successData)
             alert("post created successfully!")
         }
     })
@@ -79,26 +79,26 @@ const NewPost = () => {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log( desc.current.value, image, user._id);
-        mutate({ text: desc.current.value, image: image, userId: user._id })
+        // console.log( desc.current.value, image, user._id);
+        mutate({ text: desc.current.value, image: image, userId: user._id, userName: user.userName })
       }
 
 
 
   return (
-    <div className="flex gap-4 p-4 rounded-md bg-cyan-900">
-        <img src={students} alt="profile-img" className="w-12 h-12 rounded-full"/>
+    <div className={`flex gap-4 p-4 rounded-md ${styles.glassM}`}>
+        <img src={user.profilePic ? user.profilePic : userIcon} alt="profile-img" className="w-12 h-12 rounded-full"/>
         <div className="flex flex-col gap-4 w-full">
             <input 
                 type="text" 
                 name="" id="" 
                 placeholder="Make a Post"
-                className="rounded p-2 border-0 text-lg outline-0 text-black"
+                className="rounded p-2 border bg-transparent text-lg outline-0 text-white"
                 ref={desc}
                 required
             />
             
-            <div className="flex justify-around ">
+            <div className="flex justify-between items-center">
                 <div onClick={() => imageRef.current.click()} className="flex rounded-md gap-2 flex-col justify-center cursor-pointer items-center font-medium">
                     <TfiGallery className="text-2xl text-green-500" />
                     <p>Photo</p>
@@ -115,8 +115,8 @@ const NewPost = () => {
                     <AiOutlineSchedule className="text-2xl text-yellow-500" />
                     <p>Schedule</p>
                 </div>
-                {/* <Button style="py-2 px-4" text="Share" /> */}
-                <button className="py-2 px-4 bg-green-600" onClick={handleSubmit}>share</button>
+                
+                <button className={`${styles.buttonStyles} mt-0`} onClick={handleSubmit}>share</button>
                 {/* File Input */}
                 <div className="hidden">
                     <input type="file" name="postImage" ref={imageRef} onChange={onImageChange} />

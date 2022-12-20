@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSelector, useDispatch  } from 'react-redux';
 import { MantineProvider } from '@mantine/core';
 import { Navbar, Footer, RightSideBar } from "./components";
-import { Auth, Home, Profile } from "./pages";
+import { Auth, Home, Profile, Comments } from "./pages";
 import styles from "./style";
 import "./App.css"
 // import { Home, Feed, Login, SignUp, Root, EditProfile, Post, Profile, } from './routes';
@@ -27,7 +27,7 @@ const App = () =>{
 
   return (
   
-  <div className="bg-primary w-full h-screen">
+  <div className="bg-fromGradient w-full h-screen absolute overflow-auto">
     <QueryClientProvider client={client}>
       <BrowserRouter>
         <Routes>
@@ -45,6 +45,10 @@ const App = () =>{
           <Route
             path="/auth"
             element={user ? <Navigate to="../home" /> : <Auth />}
+          />
+          <Route
+            path="/post/:id"
+            element={user ? <Comments /> : <Navigate to="../auth" />}
           />
           <Route
             path="/profile/:id"

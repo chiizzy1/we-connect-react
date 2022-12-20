@@ -5,13 +5,13 @@ import ProfileModal from "./ProfileModal";
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { loggedUser } from "../features/user/userSlice";
-import {  useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom'; 
 import { setUserLogout } from "../features/user/userSlice";
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
 import styles from "../style";
 
-const InfoCard = () => {
+const  InfoCard = () => {
 
     const [modalState, setModalState] = useState(false);
     const { id } = useParams()
@@ -56,35 +56,35 @@ const InfoCard = () => {
     // console.log(profileUser);
         
   return (
-    <div className="flex flex-col gap-3 bg-gray-600 p-4 rounded-2xl w-4/5 ">
+    <div className={`flex flex-col gap-3 ${styles.glassM} p-4 rounded`}>
         <div className="flex items-center justify-between">
-            <h4>Profile Info</h4>
+            <h3 className={`${styles.h3Style}`}>Profile Info</h3>
             {profileUserId === user._id &&
             <>
-                <BsPencil className="cursor-pointer" onClick={() => setModalState(true)}/> 
+                <BsPencil className="cursor-pointer font-medium text-2xl text-green-300" onClick={() => setModalState(true)}/> 
                 <ProfileModal modalState={modalState} setModalState={setModalState} data={user} />
             </>
             }
         </div>
         
         <div className="flex">
-            <span>City: </span>
+            <span className="w-2/5">City: </span>
             <span>{profileUser.city}</span>
         </div>
         <div className="flex">
-            <span>Campus: </span>
+            <span className="w-2/5">Campus: </span>
             <span>{profileUser.campus}</span>
         </div>
         <div className="flex">
-            <span>Country: </span>
+            <span className="w-2/5">Country: </span>
             <span>{profileUser.country}</span>
         </div>
         <div className="flex">
-            <span>Email: </span>
+            <span className="w-2/5">Email: </span>
             <span>{profileUser.email}</span>
         </div>
 
-        <button  className={`${styles.buttonStyles}`} onClick={()=> dispatch(setUserLogout())}>Log Out</button> 
+        <button  className={`${styles.buttonStyles} mt-9`} onClick={()=> dispatch(setUserLogout())}>Log Out</button> 
     </div>
   )
 }

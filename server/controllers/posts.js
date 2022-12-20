@@ -70,7 +70,7 @@ module.exports = {
 
   createPost: async (req, res) => {
 
-    const { text, image } = req.body;
+    const { text, image, userName } = req.body;
     // const newPost = new Post(req.body);
 
     try {
@@ -84,6 +84,7 @@ module.exports = {
             cloudinaryId: result.public_id,
             likes: [],
             user: req.user.id,
+            createdBy: userName,
           });
           
         }
