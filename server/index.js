@@ -35,7 +35,7 @@ connectDB();
 
 
 //Static Folder
-app.use(express.static("public"));
+app.use(express.static("dist"));
 
 //Body Parsing
 app.use(express.json({limit: '25mb'}));
