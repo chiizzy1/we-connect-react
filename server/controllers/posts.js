@@ -50,19 +50,16 @@ module.exports = {
   },
 
   deletePost: async (req, res) => {
+    const id = req.params.id;
+    // const { userId } = req.body;
     try {
       // Find post by id
-      const { userId } = req.body;
-      let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      let post = await Post.findById(id);
       // Delete post from db
-      if (post.user === userId) {
-        await post.deleteOne();
-        res.status(200).json("Post deleted.");
-      } else {
-        res.status(403).json("Unauthorized access");
-      }
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+      await post.deleteOne();
+      res.status(200).json("Post deleted.");
+      
     } catch (err) {
       res.status(500).json(err);
     }

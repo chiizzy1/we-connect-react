@@ -27,9 +27,9 @@ const NewPost = () => {
     
     // Create New Post
 
-    const newPost = async () => {
+    const newPost = async (postData) => {
         try {
-        let { data } = await Axios.post('/api/post/createPost', { text: desc.current.value, image: image, userId: user._id }, { withCredentials: true })
+        let { data } = await Axios.post('/api/post/createPost', postData, { withCredentials: true })
     
             return data
             // console.log(user);
@@ -40,9 +40,9 @@ const NewPost = () => {
     
     const { mutate, error, isLoading, isError } = useMutation(newPost, {
         onSuccess: (successData) => { 
-        // console.log(successData)
-            alert("post created successfully!")
-        }
+          setImage(null)
+        },
+        onError: (error) => console.log(error)
     })
 
 
@@ -80,7 +80,11 @@ const NewPost = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log( desc.current.value, image, user._id);
-        mutate({ text: desc.current.value, image: image, userId: user._id, userName: user.userName })
+        if (!image){
+          alert("Please upload an Image")
+        }else{
+          mutate({ text: desc.current.value, image: image, userId: user._id, userName: user.userName })
+        }
       }
 
 

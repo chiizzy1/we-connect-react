@@ -45,7 +45,7 @@ const Followers = ({person}) => {
             </div>
         </div>
 
-        <button className={`${styles.buttonStyles}`} onClick={handleFollow} >{follow? "Follow" : "UnFollow"}</button>
+        <button className={`${styles.buttonStyles}`} onClick={handleFollow} >{follow? "UnFollow" : "Follow"}</button>
     </div>
   )
 }

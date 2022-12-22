@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { loggedUser } from '../features/user/userSlice';
 import { useSelector, useDispatch  } from 'react-redux';
-import { students, userIcon } from "../assets"
+import { coverImg, userIcon } from "../assets"
 import { Link } from "react-router-dom";
 import { userPosts } from "../features/posts/postsSlice";
 import styles from "../style";
@@ -14,7 +14,7 @@ const ProfileCard = ({location}) => {
   return (
         <div className={`flex flex-col font-poppins ${styles.glassM} rounded ${ location === "profilePage" && "mb-4"}`}>
             <div className="flex relative items-center justify-center flex-col">
-                <img src={user.profilePic ? user.profilePic : students } alt='cover-img' className="w-full max-h-48" />
+                <img src={ coverImg } alt='cover-img' className="w-full max-h-48" />
                 <img src={ user.profilePic ? user.profilePic : userIcon}  alt="user-img" className="absolute w-24 rounded-full -bottom-12 "/>
             </div>
 

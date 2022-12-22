@@ -12,6 +12,7 @@ import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
 import logo from "./logo.svg";
 import userIcon from "./userIcon.svg";
+import coverImg from "./coverImg.jpg"
 
 export {
     menu,
@@ -27,5 +28,6 @@ export {
     instagram,
     facebook,
     logo,
-    userIcon
+    userIcon,
+    coverImg
 }

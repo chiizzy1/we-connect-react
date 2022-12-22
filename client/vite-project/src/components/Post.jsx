@@ -63,7 +63,7 @@ const Post = ({post, description}) => {
   const { mutate: addComment, error: postError, isLoading: creatingComment, isError: postingError } = useMutation(postComment, {
     onSuccess: (successData) => { 
       console.log(successData)
-      alert("post created successfully!")
+      setComment(false)
      }
   })
 
@@ -77,6 +77,7 @@ const Post = ({post, description}) => {
         console.log(error);
     }
 }
+console.log(user._id);
 
 const { mutate: mutateDelete, isLoading: deletingPost } = useMutation(deletePostReq, {
   onSuccess: (successData) => { 

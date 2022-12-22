@@ -21,7 +21,7 @@ const Feed = () => {
 
   const { data, error, isError, isLoading } = useQuery(["feed"], fetchPosts, {
     onSuccess: (successData) => { 
-        // console.log(successData);
+        console.log(successData);
         dispatch(setPosts(successData))
      }
   })
@@ -40,9 +40,9 @@ const Feed = () => {
     userData = userData.filter((post)=> post.user === id)
   }
 
-  if(!userData ) return 'No Posts';
+  if(userData.length < 1) return "you haven't made any post yet";
 
-
+  
   return (
     <div className="flex relative flex-col gap-4">
         {userData.map((post) => (
